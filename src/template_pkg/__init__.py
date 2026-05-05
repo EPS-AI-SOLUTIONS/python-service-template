@@ -1,0 +1,2 @@
+"""TEMPLATE_PKG — TEMPLATE_DESCRIPTION."""
+__version__ = "0.1.0"
