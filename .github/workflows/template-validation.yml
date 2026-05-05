@@ -33,7 +33,7 @@ jobs:
       - name: uv build (wheel + sdist)
         run: uv build
 
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v4
 
       - name: Docker build (no push)
         uses: docker/build-push-action@v6
