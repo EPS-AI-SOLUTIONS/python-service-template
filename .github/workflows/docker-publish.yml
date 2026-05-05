@@ -1,0 +1,16 @@
+name: Docker Publish
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    uses: eps-ai-solutions/.github/.github/workflows/docker-publish.yml@main
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+    with:
+      # Replace with the repository name after `gh repo create --template`.
+      image-name: ${{ github.event.repository.name }}
