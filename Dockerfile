@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM python:3.13-slim AS builder
+FROM python:3.14-slim AS builder
 COPY --from=ghcr.io/astral-sh/uv:0.5.0 /uv /usr/local/bin/uv
 WORKDIR /app
 ENV UV_LINK_MODE=copy \
@@ -10,7 +10,7 @@ RUN uv sync --frozen --no-dev --no-install-project
 COPY src ./src
 RUN uv sync --frozen --no-dev
 
-FROM python:3.13-slim AS runtime
+FROM python:3.14-slim AS runtime
 RUN groupadd --system --gid 1001 app \
     && useradd --system --uid 1001 --gid app --no-create-home --shell /usr/sbin/nologin app
 WORKDIR /app
