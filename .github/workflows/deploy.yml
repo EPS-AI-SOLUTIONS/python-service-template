@@ -7,9 +7,19 @@ jobs:
   deploy:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    # Deploy is a no-op until FLY_API_TOKEN is configured — the template repo
+    # (and freshly generated repos) tag releases without a Fly app; a hard
+    # failure here only muddies the release signal (docker-publish is the
+    # check that matters). Set the FLY_API_TOKEN secret to enable deploys.
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     steps:
+      - name: Skip note (FLY_API_TOKEN not configured)
+        if: env.FLY_API_TOKEN == ''
+        run: echo "::notice::FLY_API_TOKEN not set - skipping deploy (expected in the template repo)."
       - uses: actions/checkout@v7
+        if: env.FLY_API_TOKEN != ''
       - uses: superfly/flyctl-actions/setup-flyctl@1.6
+        if: env.FLY_API_TOKEN != ''
       - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        if: env.FLY_API_TOKEN != ''
