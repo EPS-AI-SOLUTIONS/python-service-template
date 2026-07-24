@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.25
 FROM python:3.14-slim AS builder
-COPY --from=ghcr.io/astral-sh/uv:0.11.28 /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.11.32 /uv /usr/local/bin/uv
 WORKDIR /app
 ENV UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
