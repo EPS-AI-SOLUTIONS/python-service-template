@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     # Deploy is a no-op until FLY_API_TOKEN is configured — the template repo
     # (and freshly generated repos) tag releases without a Fly app; a hard
